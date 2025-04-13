@@ -1,4 +1,6 @@
-﻿using Telegram.Bot;
+﻿using System;
+using System.Diagnostics;
+using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -14,11 +16,7 @@ bot.OnMessage += OnMessage;
 bot.OnUpdate += OnUpdate;
 bot.OnError += OnError;
 
-
-while (Console.ReadKey(true).Key != ConsoleKey.X)
-{
-    Thread.Yield();
-}
+Process.GetCurrentProcess().WaitForExit();
 cts.Cancel();
 
 Session GetOrCreateSession(long chatId)
