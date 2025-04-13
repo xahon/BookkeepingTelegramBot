@@ -14,7 +14,13 @@ public class DefaultAction : ActionBase
     {
         base.Enter(message);
 
-        session.bot.SendMessage(message.Chat.Id, $"Members: {string.Join(", ", session.membersRo)}", replyMarkup: new ReplyKeyboardRemove());
+        if (session.membersRo.Count == 0)
+        {
+            session.bot.SendMessage(message.Chat.Id, "No members in current session. Define some members using /add_member command", replyMarkup: new ReplyKeyboardRemove());
+        } else
+        {
+            session.bot.SendMessage(message.Chat.Id, $"Members: {string.Join(", ", session.membersRo)}", replyMarkup: new ReplyKeyboardRemove());
+        }
 
         return ActionResult.UNDONE_ACTION;
     }
